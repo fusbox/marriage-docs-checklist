@@ -13,9 +13,17 @@ export function ReferenceGuide() {
                         <MapPin className="w-5 h-5 text-teal-100" />
                         <h3 className="font-semibold text-gold-light">Clark County Locations</h3>
                     </div>
-                    <div className="space-y-3 text-sm text-warm-gray leading-relaxed">
-                        <p><strong className="text-warm-white">Marriage License Bureau</strong><br />201 E Clark Ave, Las Vegas (8am - midnight, daily)</p>
-                        <p><strong className="text-warm-white">Henderson Office</strong><br />240 S Water St (Mon-Thu 8am-5pm. Closed noon-1pm)</p>
+                    <div className="space-y-4 text-sm text-warm-gray leading-relaxed mt-4">
+                        <a href="https://maps.google.com/?q=201+E+Clark+Ave,+Las+Vegas,+NV" target="_blank" rel="noopener noreferrer" className="block group">
+                            <strong className="text-warm-white group-hover:text-gold-light transition-colors">Marriage License Bureau</strong><br />
+                            <span className="underline decoration-teal-light/30 underline-offset-2 group-hover:decoration-gold-main/50 transition-colors">201 E Clark Ave, Las Vegas</span><br />
+                            <span className="text-xs opacity-80">(8am - midnight, daily)</span>
+                        </a>
+                        <a href="https://maps.google.com/?q=240+S+Water+St,+Henderson,+NV" target="_blank" rel="noopener noreferrer" className="block group">
+                            <strong className="text-warm-white group-hover:text-gold-light transition-colors">Henderson Office</strong><br />
+                            <span className="underline decoration-teal-light/30 underline-offset-2 group-hover:decoration-gold-main/50 transition-colors">240 S Water St, Henderson</span><br />
+                            <span className="text-xs opacity-80">(Mon-Thu 8am-5pm. Closed noon-1pm)</span>
+                        </a>
                     </div>
                 </div>
 

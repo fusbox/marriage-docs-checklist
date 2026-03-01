@@ -3,7 +3,7 @@
 import { useState, useEffect, startTransition } from "react";
 import { INITIAL_TASKS, Task } from "@/data/tasks";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, Circle, AlertCircle, Calendar, X } from "lucide-react";
+import { CheckCircle2, Circle, AlertCircle, Calendar, X, Download, MessageCircle } from "lucide-react";
 
 export function TaskList() {
     const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
@@ -156,6 +156,40 @@ export function TaskList() {
                                                             </div>
                                                         )}
                                                     </div>
+
+                                                    {/* Task Specific Actions */}
+                                                    {task.id === 't1' && (
+                                                        <div className="mt-3">
+                                                            <a
+                                                                href="/MO-Application-Single-Ceremony.pdf"
+                                                                download="MO-Application-Single-Ceremony.pdf"
+                                                                onClick={(e) => e.stopPropagation()}
+                                                                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-teal-light/20 text-teal-100 border border-teal-light/30 hover:bg-teal-light/30 transition-colors"
+                                                            >
+                                                                <Download className="w-3.5 h-3.5" />
+                                                                Download Application PDF
+                                                            </a>
+                                                        </div>
+                                                    )}
+
+                                                    {task.id === 't5' && (
+                                                        <div className="mt-3">
+                                                            <a
+                                                                href="https://wa.me/"
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                onClick={(e) => {
+                                                                    // Open WhatsApp without triggering task completion
+                                                                    e.stopPropagation();
+                                                                }}
+                                                                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 transition-colors"
+                                                            >
+                                                                <MessageCircle className="w-3.5 h-3.5" />
+                                                                Share via WhatsApp
+                                                            </a>
+                                                        </div>
+                                                    )}
+
                                                 </div>
                                             </div>
 
