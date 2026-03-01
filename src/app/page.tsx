@@ -1,6 +1,6 @@
 import { TaskList } from "@/components/TaskList";
 import { ReferenceGuide } from "@/components/ReferenceGuide";
-import { Flower2 } from "lucide-react";
+import { Countdown } from "@/components/Countdown";
 import Image from "next/image";
 import { GoldFlower, TealLeaf, OutlineTwig, FloatingDots } from "@/components/FloralDecorations";
 
@@ -31,10 +31,7 @@ export default function Home() {
 
         <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center relative z-20">
           <div className="text-left md:col-span-5 lg:col-span-6 z-20">
-            <div className="inline-flex items-center gap-2 mb-6">
-              <Flower2 className="w-5 h-5 text-gold-main" />
-              <span className="text-gold-main font-serif tracking-widest text-sm uppercase">Wedding Coordination</span>
-            </div>
+            <Countdown />
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif text-gold-main mb-6 tracking-tight leading-snug">
               Park-Meng Wedding<br />
               <span className="text-warm-white text-3xl md:text-5xl lg:text-6xl">Guide & Checklist</span>
