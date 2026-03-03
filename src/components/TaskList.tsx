@@ -3,7 +3,7 @@
 import { useState, useEffect, startTransition } from "react";
 import { INITIAL_TASKS, Task } from "@/data/tasks";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, Circle, AlertCircle, Calendar, X, Download, MessageCircle } from "lucide-react";
+import { CheckCircle2, Circle, AlertCircle, Calendar, X, Download } from "lucide-react";
 
 export function TaskList() {
     const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
@@ -26,19 +26,21 @@ export function TaskList() {
             try {
                 const parsed = JSON.parse(saved) as Task[];
 
-                // Migration: Ensure any new INITIAL_TASKS that aren't in localStorage are injected safely
-                const mergedTasks = [...parsed];
-                let hasChanges = false;
+                // Migration: Ensure state is in sync with INITIAL_TASKS (add new, remove obsolete)
+                const initialIds = new Set(INITIAL_TASKS.map(t => t.id));
 
-                INITIAL_TASKS.forEach(initialTask => {
-                    if (!mergedTasks.find(t => t.id === initialTask.id)) {
-                        mergedTasks.push(initialTask);
-                        hasChanges = true;
-                    }
-                });
+                // 1. Remove tasks from parsed state that no longer exist in INITIAL_TASKS
+                const filteredTasks = parsed.filter(t => initialIds.has(t.id));
+
+                // 2. Add tasks from INITIAL_TASKS that aren't in state
+                const currentIds = new Set(filteredTasks.map(t => t.id));
+                const tasksToAdd = INITIAL_TASKS.filter(t => !currentIds.has(t.id));
+
+                const finalTasks = [...filteredTasks, ...tasksToAdd];
+                const hasChanges = parsed.length !== finalTasks.length || tasksToAdd.length > 0;
 
                 startTransition(() => {
-                    setTasks(hasChanges ? mergedTasks : parsed);
+                    setTasks(hasChanges ? finalTasks : parsed);
                 });
             } catch (e) {
                 console.error("Failed to parse saved tasks", e);
@@ -172,23 +174,6 @@ export function TaskList() {
                                                         </div>
                                                     )}
 
-                                                    {task.id === 't5' && (
-                                                        <div className="mt-3">
-                                                            <a
-                                                                href="https://wa.me/"
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                onClick={(e) => {
-                                                                    // Open WhatsApp without triggering task completion
-                                                                    e.stopPropagation();
-                                                                }}
-                                                                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 transition-colors"
-                                                            >
-                                                                <MessageCircle className="w-3.5 h-3.5" />
-                                                                Share via WhatsApp
-                                                            </a>
-                                                        </div>
-                                                    )}
 
                                                 </div>
                                             </div>
